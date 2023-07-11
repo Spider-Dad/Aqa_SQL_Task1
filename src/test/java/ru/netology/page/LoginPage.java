@@ -12,7 +12,7 @@ public class LoginPage {
     private final SelenideElement loginButton = $("[data-test-id=action-login]");
     private final SelenideElement errorNotification = $("[data-test-id='error-notification']");
 
-    public void verifyErrorNotificationVisible(){
+    public void verifyErrorNotificationVisible() {
         errorNotification.shouldBe(visible);
     }
 

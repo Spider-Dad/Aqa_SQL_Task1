@@ -1,6 +1,5 @@
 package ru.netology.test;
 
-import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +29,7 @@ public class LoginTest {
 
     @Test
     @DisplayName("Should get error notification if user not exist in base")
-    void shouldGetErrorIfLoginNotAddingToBaseTest(){
+    void shouldGetErrorIfLoginNotAddingToBaseTest() {
         var loginpage = open("http://localhost:9999", LoginPage.class);
         var authInfo = DataHelper.generateRandomUser();
         loginpage.validLogin(authInfo);
@@ -40,7 +39,7 @@ public class LoginTest {
 
     @Test
     @DisplayName("Should get error if login with exist base and active user and random verification code")
-    void shouldGetErrorIfLoginExistUserAndRandomVerificationCodeTest(){
+    void shouldGetErrorIfLoginExistUserAndRandomVerificationCodeTest() {
         var loginpage = open("http://localhost:9999", LoginPage.class);
         var authInfo = DataHelper.getAuthInfoWithTestData();
         var verificationPage = loginpage.validLogin(authInfo);

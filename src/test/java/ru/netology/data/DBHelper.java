@@ -1,6 +1,5 @@
 package ru.netology.data;
 
-import lombok.Data;
 import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -11,29 +10,26 @@ import java.sql.SQLException;
 
 public class DBHelper {
 
-    private static QueryRunner runner = new QueryRunner();
+    private static final QueryRunner runner = new QueryRunner();
 
-    private DBHelper(){
+    private DBHelper() {
 
     }
 
-// метод для подключения к базе данных
     private static Connection getConn() throws SQLException {
         return DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/app", "app", "pass"
         );
     }
 
-    // метод возвращающий последний сгенерированный код верификации
     @SneakyThrows
     public static DataHelper.VerificationCode getVerificationCode() {
         var codeSQL = "SELECT code FROM auth_codes ORDER BY created DESC LIMIT 1";
-        var conn = getConn(); // подключение  к базе данных из метода
-        var code = runner.query(conn, codeSQL, new ScalarHandler<String>()); // с помощью runner и метода query выполняем запрос codeSQL через подключение conn получаем значение одног поля (ScalarHandler)
-        return new DataHelper.VerificationCode(code); // создаем экземпляр VerificationCode передавая строку с кодом code
+        var conn = getConn();
+        var code = runner.query(conn, codeSQL, new ScalarHandler<String>());
+        return new DataHelper.VerificationCode(code);
     }
 
-   // метод для очистки базы данных
     @SneakyThrows
     public static void cleanDB() {
         var runner = new QueryRunner();
